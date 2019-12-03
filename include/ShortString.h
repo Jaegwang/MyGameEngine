@@ -3,19 +3,22 @@
 #include <iostream>
 #include <algorithm>
 
-template< unsigned N = 64, typename T = char >
+template< unsigned N=64, typename T=char >
 class ShortString
 {
 public:
 
 	ShortString() {}
 	ShortString(const T* p);
+	ShortString(const T* p, unsigned l);
 	ShortString(const ShortString& ss);
 
-	ShortString& append(const T* p, unsigned l=0);
+	ShortString& append(const T* p);
+	ShortString& append(const char c);
 	ShortString& append(const ShortString& ss);
 	ShortString& append(const int num);
 	ShortString& append(const float num);
+	ShortString& append(const double num);
 
 	ShortString& operator = (const T* p);
 	ShortString& operator = (const ShortString& ss);
@@ -38,7 +41,7 @@ public:
 
 private:
 
-	char data[N];
+	T data[N];
 	unsigned len = 0;
 };
 
@@ -87,7 +90,7 @@ int ShortString<N, T>::findLastOf(const T* p, unsigned s)
 template< unsigned N, typename T > inline
 ShortString<N, T> ShortString<N, T>::subString(unsigned p, unsigned l)
 {
-	return ShortString<N, T>();
+	return ShortString<N, T>(data+p, l);
 }
 
 
@@ -99,6 +102,14 @@ ShortString<N,T>::ShortString(const T* p)
 }
 
 template< unsigned N, typename T > inline
+ShortString<N, T>::ShortString(const T* p, unsigned l)
+{
+	len = l;
+	for (unsigned i = 0; i < len; ++i) data[i] = p[i];
+	data[len] = '\0';
+}
+
+template< unsigned N, typename T > inline
 ShortString<N,T>::ShortString(const ShortString<N,T>& ss)
 {
 	len = 0;
@@ -106,35 +117,25 @@ ShortString<N,T>::ShortString(const ShortString<N,T>& ss)
 }
 
 template< unsigned N, typename T > inline
-ShortString<N,T>& ShortString<N,T>::append(const T* p, unsigned l)
+ShortString<N,T>& ShortString<N,T>::append(const T* p)
 {
-	for (unsigned i = len; i < N; ++i)
-	{
-		data[i] = p[i - len];
-		if (data[i] == '\0')
-		{
-			len = i;
-			break;
-		}
-	}
+	unsigned s = strlen(p);
+	strcpy_s(data+len, s+1, p);
+	len += s;
+	return *this;
+}
 
+template< unsigned N, typename T > inline
+ShortString<N, T>& ShortString<N, T>::append(const char p)
+{
+	data[len++] = p;
 	return *this;
 }
 
 template< unsigned N, typename T > inline
 ShortString<N,T>& ShortString<N, T>::append(const ShortString<N, T>& ss)
 {
-	for (unsigned i = len; i < N; ++i)
-	{
-		data[i] = ss.data[i - len];
-		if (data[i] == '\0')
-		{
-			len = i;
-			break;
-		}
-	}
-
-	return *this;
+	return append(ss.data);
 }
 
 template< unsigned N, typename T> inline
@@ -146,6 +147,13 @@ ShortString<N, T>& ShortString<N, T>::append(const int num)
 
 template< unsigned N, typename T> inline
 ShortString<N, T>& ShortString<N, T>::append(const float num)
+{
+	len += sprintf_s(data+len, N-len, "%f", num);
+	return *this;
+}
+
+template< unsigned N, typename T> inline
+ShortString<N, T>& ShortString<N, T>::append(const double num)
 {
 	len += sprintf_s(data+len, N-len, "%f", num);
 	return *this;
