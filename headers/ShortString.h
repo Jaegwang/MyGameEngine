@@ -1,5 +1,9 @@
 #pragma once
 
+#include <cstring>
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <iostream>
 #include <algorithm>
 
@@ -119,8 +123,8 @@ ShortString<N,T>::ShortString(const ShortString<N,T>& ss)
 template< unsigned N, typename T > inline
 ShortString<N,T>& ShortString<N,T>::append(const T* p)
 {
-	unsigned s = strlen(p);
-	strcpy_s(data+len, s+1, p);
+	size_t s = strlen(p);
+	strcpy(data+len, p);
 	len += s;
 	return *this;
 }

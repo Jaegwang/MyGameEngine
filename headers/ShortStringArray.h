@@ -1,6 +1,6 @@
 #pragma once
 
-#include <ShortString.h>
+#include "ShortString.h"
 
 template< unsigned N, unsigned M >
 class ShortStringArray
