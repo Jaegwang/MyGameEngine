@@ -24,10 +24,11 @@
 
 /* Begin PBXFileReference section */
 		08E4F8E923B4D55B008B95DB /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		08E4F8EC23B4D5CE008B95DB /* MyGameEngine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = MyGameEngine; path = "/Users/jaegwang/Desktop/untitled folder/MyGameEngine/build/Debug/MyGameEngine"; sourceTree = "<absolute>"; };
 		08E4F8ED23B4D677008B95DB /* ShortString.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShortString.h; sourceTree = "<group>"; };
 		08E4F8EE23B4D684008B95DB /* ShortStringArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortStringArray.h; sourceTree = "<group>"; };
 		08E4F8EF23B4D8DF008B95DB /* Object.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Object.h; path = headers/Object.h; sourceTree = SOURCE_ROOT; };
+		08F808CC23B5AE12006CD3F7 /* MyGameEngine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MyGameEngine; sourceTree = BUILT_PRODUCTS_DIR; };
+		08F808CE23B63FBB006CD3F7 /* Queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Queue.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +45,8 @@
 		08E4F8E723B4D538008B95DB /* headers */ = {
 			isa = PBXGroup;
 			children = (
+				08F808CE23B63FBB006CD3F7 /* Queue.h */,
+				08E4F8EF23B4D8DF008B95DB /* Object.h */,
 				08E4F8EE23B4D684008B95DB /* ShortStringArray.h */,
 				08E4F8ED23B4D677008B95DB /* ShortString.h */,
 			);
@@ -54,7 +57,6 @@
 			isa = PBXGroup;
 			children = (
 				08E4F8E923B4D55B008B95DB /* main.cpp */,
-				08E4F8EF23B4D8DF008B95DB /* Object.h */,
 			);
 			path = sources;
 			sourceTree = "<group>";
@@ -64,6 +66,7 @@
 			children = (
 				08E4F8E823B4D540008B95DB /* sources */,
 				08E4F8E723B4D538008B95DB /* headers */,
+				08F808CC23B5AE12006CD3F7 /* MyGameEngine */,
 			);
 			sourceTree = "<group>";
 		};
@@ -84,7 +87,7 @@
 			);
 			name = MyGameEngine;
 			productName = MyGameEngine;
-			productReference = 08E4F8EC23B4D5CE008B95DB /* MyGameEngine */;
+			productReference = 08F808CC23B5AE12006CD3F7 /* MyGameEngine */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */

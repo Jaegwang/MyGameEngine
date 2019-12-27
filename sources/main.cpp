@@ -11,6 +11,7 @@
 #include "Object.h"
 #include "ShortStringArray.h"
 #include "ShortString.h"
+#include "Queue.h"
 
 int main( const int argc, const char** argv )
 {
