@@ -12,16 +12,20 @@
 #include "ShortStringArray.h"
 #include "ShortString.h"
 #include "Queue.h"
+#include "ThreadPool.h"
+
 
 int main( const int argc, const char** argv )
 {
-
-    ShortString<> a("abcgd");
-    ShortString<> b("abceg");
-
-    bool check = a != b;
+    std::vector<int> bigbuffer;
+    bigbuffer.resize(10000);
     
-    std::cout<< check << std::endl;
+    for( int i=0; i<10000; ++i )
+        bigbuffer[i] = 10;
     
+    
+    for( int n=0; n<10000; ++n )
+        bigbuffer[n] *= 2; 
+        
     std::cout<<"hello world" << std::endl;
 }

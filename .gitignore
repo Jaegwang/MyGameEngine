@@ -32,6 +32,13 @@
 *.app
 
 .DS_Store
+
+third/*
+
 *.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+!*.xcworkspace/contents.xcworkspacedata
+/*.gcno
 
 /x64

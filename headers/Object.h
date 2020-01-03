@@ -25,13 +25,16 @@ private:
     std::atomic<int>  ptr = 0;
     std::atomic<bool> exitSignal = false;
     
+    int step;
+    int numThreads;
     int numElements;
-    
     
 public:
     
     System()
     {
+        step = 4;
+        numThreads = 4;
         numElements = 100;
         ptr = numElements;
     }
@@ -42,19 +45,20 @@ public:
         
     }
     
-    void start()
+    void initialize()
     {
+        exitSignal = false;
+        
         auto kernel = [&]()
         {
             while( !exitSignal )
             {
-                while( ptr >= numElements );
+                int pos = ptr += step;
+                while( pos >= numElements );
                 
-                int pos = ptr += 4;
-                int end = std::min(pos, numElements);
+                int end = std::min(pos+step, numElements);
                 
-                
-                for( int x=pos-4; x<end; ++x)
+                for( int x=pos; x<end; ++x)
                 {
                     run( x, objects[x] );
                 }
@@ -64,11 +68,30 @@ public:
         
         futures.clear();
         
-        for( int t=0; t<4; ++t )
+        for( int t=0; t<numThreads; ++t )
         {
             futures.push_back( std::async(std::launch::async, kernel) );
         }
         
+    }
+    
+    void start()
+    {
+        ptr = -step;
+    }
+    void wait()
+    {
+        while( ptr < numElements );
+    }
+    
+    void exit()
+    {
+        exitSignal = true;
+    }
+    
+    void join()
+    {
+        for( int t=0; t<numThreads; ++t ) futures[t].wait();
     }
     
     
