@@ -13,7 +13,7 @@
 #include "ShortString.h"
 #include "Queue.h"
 #include "ThreadPool.h"
-
+#include "Launcher.h"
 
 int main( const int argc, const char** argv )
 {

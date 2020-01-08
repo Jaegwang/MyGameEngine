@@ -42,3 +42,7 @@ third/*
 /*.gcno
 
 /x64
+
+/build/*
+.sconsign.*
+.vscode
