@@ -14,18 +14,33 @@
 #include "Queue.h"
 #include "ThreadPool.h"
 #include "Launcher.h"
+#include "Async.h"
 
 int main( const int argc, const char** argv )
 {
-    std::vector<int> bigbuffer;
-    bigbuffer.resize(10000);
-    
-    for( int i=0; i<10000; ++i )
-        bigbuffer[i] = 10;
-    
-    
-    for( int n=0; n<10000; ++n )
-        bigbuffer[n] *= 2; 
-        
-    std::cout<<"hello world" << std::endl;
+    AsyncPool pool;
+
+    pool.initialize( 30 );
+
+/*
+    std::vector<int> buffer;
+    buffer.resize( 100 );
+
+    auto kernel = [&](unsigned n){
+
+        buffer[n] = n;
+
+    };
+
+    pool.launch( kernel, 100 );
+
+    for( int i=0; i<100; ++i )
+    {
+        std::cout<< buffer[i] << std::endl;
+    }
+
+*/
+
+    std::cout<<"end prop"<<std::endl;
+    return 1;
 }
