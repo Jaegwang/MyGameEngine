@@ -15,31 +15,14 @@
 #include "ThreadPool.h"
 #include "Launcher.h"
 #include "Async.h"
+#include "SPMCQ.h"
 
 int main( const int argc, const char** argv )
 {
+    ThreadPool thPool;
     AsyncPool pool;
 
-    pool.initialize( 30 );
-
-/*
-    std::vector<int> buffer;
-    buffer.resize( 100 );
-
-    auto kernel = [&](unsigned n){
-
-        buffer[n] = n;
-
-    };
-
-    pool.launch( kernel, 100 );
-
-    for( int i=0; i<100; ++i )
-    {
-        std::cout<< buffer[i] << std::endl;
-    }
-
-*/
+    thPool.initialize( 10 );
 
     std::cout<<"end prop"<<std::endl;
     return 1;

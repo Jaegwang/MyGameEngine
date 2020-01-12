@@ -11,37 +11,51 @@
 #include <future>
 #include <atomic>
 #include <algorithm>
+#include <SPMCQ.h>
+
+class TaskFunction
+{
+
+};
 
 class ThreadPool
 {
 private:
     
     std::vector<std::future<void>> futures;
-    
-    std::atomic<int>  ptr = 0;
+
+    SPMCQ<TaskFunction> workQueue;
+
+    int numTotalThreads;
+
     std::atomic<bool> exitSignal = false;
-    
-    int step;
-    int numThreads;
-    int numElements;
-    
+
 public:
-    
+
     ThreadPool()
     {}
-    
-    void initialize( int numThreads )
+
+    void initialize( const unsigned num )
     {
-        
-        auto kernel = [&](){
-            
-            
+        numTotalThreads = num;
+
+        auto ff = [&](int tid){
+
+            while( !exitSignal )
+            {
+                // Pop task.
+
+            }
         };
-        
-        futures.clear();
-        futures.push_back( std::async( std::launch::async, kernel ) );
-        
+
+        for( int n=0; n<numTotalThreads; ++n )
+        {
+            futures.push_back( std::async(std::launch::async, ff, n) );
+        }
     }
-    
+
+
+
+
     
 };
